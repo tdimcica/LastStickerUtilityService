@@ -1,4 +1,4 @@
-package com.dimcica.mylaststickerhelper
+package com.dimcica.laststicker.helper
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

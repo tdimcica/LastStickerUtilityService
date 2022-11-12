@@ -1,7 +1,7 @@
-package com.dimcica.mylaststickerhelper.controller
+package com.dimcica.laststicker.helper.controller
 
-import com.dimcica.mylaststickerhelper.model.CollectionChecklist
-import com.dimcica.mylaststickerhelper.repository.CollectionChecklistRepository
+import com.dimcica.laststicker.helper.model.CollectionChecklist
+import com.dimcica.laststicker.helper.repository.CollectionChecklistRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping

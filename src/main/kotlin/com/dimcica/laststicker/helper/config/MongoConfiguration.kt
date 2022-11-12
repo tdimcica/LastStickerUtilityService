@@ -1,4 +1,4 @@
-package com.dimcica.mylaststickerhelper.config
+package com.dimcica.laststicker.helper.config
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 
 @Configuration
 @EnableReactiveMongoRepositories(
-    basePackages = ["com.dimcica.mylaststickerhelper.repository"]
+    basePackages = ["com.dimcica.laststicker.helper.repository"]
 )
 class MongoConfiguration () {}

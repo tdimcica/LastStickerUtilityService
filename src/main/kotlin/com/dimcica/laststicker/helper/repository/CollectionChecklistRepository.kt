@@ -1,6 +1,6 @@
-package com.dimcica.mylaststickerhelper.repository
+package com.dimcica.laststicker.helper.repository
 
-import com.dimcica.mylaststickerhelper.model.CollectionChecklist
+import com.dimcica.laststicker.helper.model.CollectionChecklist
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.stereotype.Repository
 

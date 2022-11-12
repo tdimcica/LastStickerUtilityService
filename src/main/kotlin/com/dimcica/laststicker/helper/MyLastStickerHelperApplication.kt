@@ -1,10 +1,10 @@
-package com.dimcica.mylaststickerhelper
+package com.dimcica.laststicker.helper
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication(
-	scanBasePackages = ["com.dimcica.mylaststickerhelper"]
+	scanBasePackages = ["com.dimcica.laststicker.helper"]
 )
 class MyLastStickerHelperApplication
 
