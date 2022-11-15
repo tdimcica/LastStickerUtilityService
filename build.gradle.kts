@@ -36,6 +36,11 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
+
+	// Selenium
+	implementation("org.seleniumhq.selenium:selenium-java:4.6.0")
+	implementation("org.seleniumhq.selenium:selenium-chrome-driver:4.6.0")
+	implementation("io.github.bonigarcia:webdrivermanager:5.3.1")
 }
 
 tasks.withType<KotlinCompile> {

@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document("checklists")
 data class CollectionChecklist(
     @Id val collectionName: String,
-    val collectionLink: String,
+    val collectionUrl: String,
     val checklist: Map<String, CardDetail>
 )
 

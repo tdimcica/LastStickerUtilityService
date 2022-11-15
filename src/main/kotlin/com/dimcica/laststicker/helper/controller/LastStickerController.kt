@@ -1,5 +1,6 @@
 package com.dimcica.laststicker.helper.controller
 
+import com.dimcica.laststicker.helper.crawler.CollectionChecklistCrawler
 import com.dimcica.laststicker.helper.model.CollectionChecklist
 import com.dimcica.laststicker.helper.repository.CollectionChecklistRepository
 import org.springframework.http.HttpStatus
@@ -15,6 +16,7 @@ import reactor.core.publisher.Flux
 @RestController
 @RequestMapping("/laststicker")
 class LastStickerController(
+    val collectionChecklistCrawler: CollectionChecklistCrawler,
     val collectionChecklistRepository: CollectionChecklistRepository
 ) {
     @GetMapping(
@@ -35,4 +37,19 @@ class LastStickerController(
     ) {
         collectionChecklistRepository.save(checklist).subscribe()
     }
+
+    @PutMapping(
+        value = ["/checklist/scrape"],
+        consumes = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    suspend fun scrapeChecklist(
+        @RequestBody scrapeRequest: ScrapeRequest
+    ) {
+        collectionChecklistCrawler.getCollectionChecklist(scrapeRequest.url)
+    }
 }
+
+data class ScrapeRequest(
+    val url: String
+)
