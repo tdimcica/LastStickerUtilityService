@@ -1,14 +1,16 @@
 package com.dimcica.laststicker.helper.controller
 
-import com.dimcica.laststicker.helper.crawler.CollectionChecklistCrawler
-import com.dimcica.laststicker.helper.model.CollectionChecklist
-import com.dimcica.laststicker.helper.repository.CollectionChecklistRepository
+import com.dimcica.laststicker.helper.crawler.CollectionCrawler
+import com.dimcica.laststicker.helper.model.Collection
+import com.dimcica.laststicker.helper.repository.CollectionRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Flux
@@ -16,40 +18,47 @@ import reactor.core.publisher.Flux
 @RestController
 @RequestMapping("/laststicker")
 class LastStickerController(
-    val collectionChecklistCrawler: CollectionChecklistCrawler,
-    val collectionChecklistRepository: CollectionChecklistRepository
+    val collectionCrawler: CollectionCrawler,
+    val collectionRepository: CollectionRepository
 ) {
     @GetMapping(
-        value = ["/checklist"],
+        value = ["/collection"],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun getChecklists(): Flux<CollectionChecklist> {
-        return collectionChecklistRepository.findAll()
+    fun getCollections(): Flux<Collection> {
+        return collectionRepository.findAll()
     }
 
     @PutMapping(
-        value = ["/checklist"],
+        value = ["/collection"],
         consumes = [MediaType.APPLICATION_JSON_VALUE]
     )
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    suspend fun addCheckList(
-        @RequestBody checklist: CollectionChecklist
+    suspend fun addCollection(
+        @RequestBody collection: Collection
     ) {
-        collectionChecklistRepository.save(checklist).subscribe()
+        collectionRepository.save(collection).subscribe()
+    }
+
+    @DeleteMapping(
+        value = ["/collection"],
+        consumes = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    suspend fun deleteCollection(@RequestBody collection: Collection) {
+        collectionRepository.delete(collection).subscribe()
     }
 
     @PutMapping(
-        value = ["/checklist/scrape"],
-        consumes = [MediaType.APPLICATION_JSON_VALUE]
+        value = ["/collection/scrape"],
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    suspend fun scrapeChecklist(
-        @RequestBody scrapeRequest: ScrapeRequest
-    ) {
-        collectionChecklistCrawler.getCollectionChecklist(scrapeRequest.url)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    suspend fun scrapeCollection(
+        @RequestBody collection: Collection
+    ): Collection {
+        return collectionCrawler.scrape(collection)
     }
 }
-
-data class ScrapeRequest(
-    val url: String
-)

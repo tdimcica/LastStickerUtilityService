@@ -1,28 +1,30 @@
 package com.dimcica.laststicker.helper.crawler
 
 import com.dimcica.laststicker.helper.model.CardDetail
+import com.dimcica.laststicker.helper.model.Collection
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.openqa.selenium.By
 import org.openqa.selenium.chrome.ChromeDriver
 
-class CollectionChecklistCrawler {
+class CollectionCrawler {
     init {
         WebDriverManager
             .chromedriver()
             .setup()
     }
 
-    fun getCollectionChecklist(url: String): Map<String, CardDetail> {
-        val checklist = HashMap<String, CardDetail>()
-
+    fun scrape(collection: Collection): Collection {
         val driver = ChromeDriver()
-        driver.get(url)
+        driver.get(collection.url)
         driver.findElement(By.cssSelector(".fc-cta-consent")).click()
 
-        try {
-            val collectionChecklistTable = driver.findElements(By.cssSelector("#checklist tbody tr"))
+        val name = driver.findElement(By.cssSelector("#content h1")).text
+        val checklist = HashMap<String, CardDetail>()
 
-            for (cardRow in collectionChecklistTable) {
+        try {
+            val checklistTable = driver.findElements(By.cssSelector("#checklist tbody tr"))
+
+            for (cardRow in checklistTable) {
                 val cardRowColumns = cardRow.findElements(By.cssSelector("td"))
                 val id = cardRowColumns[0].text
                 val title = cardRowColumns[1].text
@@ -36,6 +38,6 @@ class CollectionChecklistCrawler {
             driver.quit()
         }
 
-        return checklist
+        return collection.copy(name = name, checklist = checklist)
     }
 }

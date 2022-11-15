@@ -6,5 +6,5 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class CrawlerConfiguration {
     @Bean
-    fun collectionChecklistCrawler(): CollectionChecklistCrawler = CollectionChecklistCrawler()
+    fun collectionCrawler(): CollectionCrawler = CollectionCrawler()
 }
