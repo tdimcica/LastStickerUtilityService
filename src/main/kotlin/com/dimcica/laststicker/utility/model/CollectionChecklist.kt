@@ -1,4 +1,4 @@
-package com.dimcica.laststicker.helper.model
+package com.dimcica.laststicker.utility.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

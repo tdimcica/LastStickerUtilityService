@@ -1,1 +1,1 @@
-# MyLastStickerHelper
+# LastStickerUtilityService
