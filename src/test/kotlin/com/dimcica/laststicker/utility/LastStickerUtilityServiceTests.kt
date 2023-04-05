@@ -1,10 +1,10 @@
-package com.dimcica.laststicker.helper
+package com.dimcica.laststicker.utility
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class MyLastStickerHelperApplicationTests {
+class LastStickerUtilityServiceTests {
 
 	@Test
 	fun contextLoads() {

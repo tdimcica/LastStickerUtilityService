@@ -1,4 +1,4 @@
-package com.dimcica.laststicker.helper
+package com.dimcica.laststicker.utility
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -6,8 +6,8 @@ import org.springframework.boot.runApplication
 @SpringBootApplication(
 	scanBasePackages = ["com.dimcica.laststicker.helper"]
 )
-class MyLastStickerHelperApplication
+class LastStickerUtilityService
 
 fun main(args: Array<String>) {
-	runApplication<MyLastStickerHelperApplication>(*args)
+	runApplication<LastStickerUtilityService>(*args)
 }

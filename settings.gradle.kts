@@ -1,1 +1,1 @@
-rootProject.name = "MyLastStickerHelper"
+rootProject.name = "LastStickerUtilityService"
